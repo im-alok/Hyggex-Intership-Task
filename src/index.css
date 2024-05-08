@@ -1,0 +1,8 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.gradient-border {
+    border: 1px solid transparent; /* transparent border to keep space for the gradient */
+    border-image: linear-gradient(to right, #217EEC, #082299) 1; /* gradient as border image */
+}
