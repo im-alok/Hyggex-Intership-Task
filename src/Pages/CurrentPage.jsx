@@ -44,19 +44,23 @@ const CurrentPage = () => {
     // console.log(currentCard)
 
     function backHandler(){
-        const currentIndex = currentCard.id;
-        if(currentIndex === 0){
-            return;
+        if(currentCard){
+            const currentIndex = currentCard.id;
+            if(currentIndex === 0){
+                return;
+            }
+            setCurrentCard(tabData[currentIndex - 1]);
         }
-        setCurrentCard(tabData[currentIndex - 1]);
     }
 
     function forwardHandler(){
-        const currentIndex = currentCard.id;
-        if(currentIndex + 1 === tabData.length){
-            return;
+        if(currentCard){
+            const currentIndex = currentCard.id;
+            if(currentIndex + 1 === tabData.length){
+                return;
+            }
+            setCurrentCard(tabData[currentIndex + 1]);
         }
-        setCurrentCard(tabData[currentIndex + 1]);
     }
 
     return (
@@ -88,7 +92,7 @@ const CurrentPage = () => {
                 >Relations and Functions ( Mathematics )</h1>
 
                 {/* option Menu */}
-                <div className='flex flex-col gap-10 w-[9/12] mx-auto'>   
+                <div className='flex flex-col gap-10 full mx-auto items-center'>   
                     <div className='flex items-center gap-10'>
                         {
                             TabData?.map((item)=>(
@@ -98,9 +102,9 @@ const CurrentPage = () => {
                                 onClick={()=>{
                                     setCurrentTab(item.title);
                                     const Result = CurrentPageExplore.filter((res)=>res.tag === item.title);
-                                    // console.log(Result[0].data[0])
+                                    // console.log(Result[0].data)
                                     setTabData(Result[0].data);
-                                    setCurrentCard(Result[0].data[0]);
+                                    Result[0].data.length > 0 ? (setCurrentCard(Result[0].data[0])) : (setCurrentCard(null));
                                 }}
                                 >
                                     {item.title}
@@ -138,7 +142,7 @@ const CurrentPage = () => {
 
                             {/* current Card */}
                             <div className='text-2xl font-bold  '>
-                                <span>{currentCard.id < 10 ?('0'):('')}{currentCard.id + 1} / {tabData.length < 10 ? ('0'):('')}{tabData.length}</span>
+                                <span>{currentCard?.id < 10 ?('0'):('')}{currentCard?.id + 1} / {tabData.length < 10 ? ('0'):('')}{tabData.length}</span>
                             </div>
 
                             <div
